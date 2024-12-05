@@ -1,93 +1,159 @@
 .siteBar {
   display: flex;
-  overflow: hidden;
   height: 100vh;
   .userProfile {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 30px;
     background: #70bfd2;
     height: 100%;
-    padding: 15px;
-    width: 80px;
-    position: sticky;
-    top: 0;
+    padding: 15px 0;
+    width: 70px;
     .userDiv {
-      width: 50px;
-      height: 50px;
+      width: 43px;
+      height: 43px;
       position: relative;
       .user {
-        width: 50px;
-        height: 50px;
+        width: 43px;
+        height: 43px;
         border-radius: 5px;
       }
       .onlineDiv {
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
         background: #3eaf3f;
         border-radius: 50%;
         border: solid 3px white;
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: -4px;
+        right: -3px;
       }
+    }
+    img {
+      width: 30px;
+      height: auto;
+      cursor: pointer;
+    }
+    h4 {
+      color: white;
+      font-weight: 600;
+      font-size: 19px;
+      cursor: pointer;
     }
   }
   .userMenu {
-    width: 300px;
+    width: 270px;
     height: 100%;
     background: #e3f1f4;
     span {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 85px;
       border-bottom: solid 2px #298ea699;
       h3 {
         font-weight: 500;
         display: flex;
         align-items: center;
         gap: 5px;
-        padding: 15px;
-        margin-top: 15px;
+        font-size: 16px;
+        padding: 25px 20px;
         cursor: pointer;
         .arrow {
-          width: 10px;
-          height: auto;
+          font-size: 17px;
         }
       }
       .logout {
-        width: 20px;
-        height: auto;
-        margin: 15px;
-        padding-top: 10px;
+        font-size: 19px;
         cursor: pointer;
       }
     }
     .detailsPersonal {
-      font-size: 20px;
+      font-size: 15px;
       border-bottom: solid 2px #298ea699;
       cursor: pointer;
       transition: all 0.3s ease;
       list-style: none;
-      padding: 25px;
-
+      padding: 5px 13px;
+      .personalTitle {
+        padding: 15px 10px;
+      }
       h3 {
         font-weight: 500;
         display: flex;
         align-items: center;
         gap: 5px;
-        margin-top: 25px;
-        font-size: 18px;
+        font-size: 15px;
         cursor: pointer;
-        padding: 5px 15px;
-
+        padding: 14px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .hashtag {
-          width: 16px;
-          height: auto;
+          font-size: 18px;
+        }
+        .iconTittle {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          position: relative;
+
+          .userMsg {
+            width: 35px;
+            height: 35px;
+          }
+          .onlineDiv {
+            background: #3eaf3f;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: solid 2px white;
+            position: absolute;
+            bottom: -4px;
+            right: 79px;
+          }
         }
         &:hover {
           background: #70bfd1;
-          border-radius: 10px;
+          border-radius: 5px;
+        }
+        .quantity {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          font-size: 15px;
+          color: #000000;
+          background: white;
+          min-width: 20px;
+          width: auto;
+          height: 20px;
+          border-radius: 50px;
+        }
+      }
+    }
+    .userOptions {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      padding: 15px 20px;
+      gap: 10px;
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #063248;
+        cursor: pointer;
+        padding: 10px;
+        .optionIcons {
+          font-size: 18px;
+        }
+        &:hover {
+          background: #70bfd1;
+          width: 100%;
+          border-radius: 5px;
         }
       }
     }
