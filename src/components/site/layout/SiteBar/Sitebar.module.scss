@@ -64,19 +64,13 @@
       }
     }
     .detailsPersonal {
-      padding: 30px;
       font-size: 20px;
       border-bottom: solid 2px #298ea699;
       cursor: pointer;
       transition: all 0.3s ease;
       list-style: none;
+      padding: 25px;
 
-      summary {
-        &::-webkit-details-marker {
-          display: none;
-          content: ">";
-        }
-      }
       h3 {
         font-weight: 500;
         display: flex;
@@ -85,13 +79,16 @@
         margin-top: 25px;
         font-size: 18px;
         cursor: pointer;
+        padding: 5px 15px;
+
         .hashtag {
           width: 16px;
           height: auto;
         }
-      }
-      &:hover {
-        background: #70bfd1;
+        &:hover {
+          background: #70bfd1;
+          border-radius: 10px;
+        }
       }
     }
   }
