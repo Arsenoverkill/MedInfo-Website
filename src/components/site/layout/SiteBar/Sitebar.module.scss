@@ -1,6 +1,8 @@
 .siteBar {
   display: flex;
   height: 100vh;
+  position: sticky;
+  top: 0;
   .userProfile {
     display: flex;
     flex-direction: column;
@@ -59,6 +61,7 @@
         font-size: 16px;
         padding: 25px 20px;
         cursor: pointer;
+        transition: all 0.5s ease;
         .arrow {
           font-size: 17px;
         }
@@ -72,11 +75,21 @@
       font-size: 15px;
       border-bottom: solid 2px #298ea699;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.5s ease;
       list-style: none;
       padding: 5px 13px;
       .personalTitle {
         padding: 15px 10px;
+        transition: transform 0.3s ease;
+
+        &::-webkit-details-marker {
+          transition: transform 0.3s ease;
+        }
+      }
+      &[open] summary {
+        &::-webkit-details-marker {
+          transform: rotate(90deg); /* Поворот стрелки при открытии */
+        }
       }
       h3 {
         font-weight: 500;

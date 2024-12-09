@@ -12,7 +12,6 @@ import { RiTestTubeLine } from "react-icons/ri";
 import { IoLayersOutline } from "react-icons/io5";
 import { RiLinksLine } from "react-icons/ri";
 
-
 const SiteBar = () => {
   return (
     <div className={scss.siteBar}>
@@ -48,9 +47,21 @@ const SiteBar = () => {
           </h3>
           <h3>
             <div className={scss.iconTittle}>
-              <HiOutlineHashtag className={scss.hashtag} /> Dashboard
+              <HiOutlineHashtag className={scss.hashtag} /> Медицинская карта
             </div>
-            <div className={scss.quantity}>1</div>
+            <div className={scss.quantity}>222</div>
+          </h3>
+          <h3>
+            <div className={scss.iconTittle}>
+              <HiOutlineHashtag className={scss.hashtag} /> Прививки
+            </div>
+            <div className={scss.quantity}>10</div>
+          </h3>
+          <h3>
+            <div className={scss.iconTittle}>
+              <HiOutlineHashtag className={scss.hashtag} /> Назначения
+            </div>
+            <div className={scss.quantity}>191</div>
           </h3>
         </details>
         <details className={scss.detailsPersonal}>

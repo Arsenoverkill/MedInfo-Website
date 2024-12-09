@@ -1,0 +1,64 @@
+.steps {
+  h3 {
+    padding: 24px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: solid 2.5px #d2d2d2;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+    align-items: start;
+    margin-top: 110px;
+    padding: 0 55px;
+    .step1 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: start;
+      p {
+        color: #063248;
+        font-size: 20px;
+        padding: 0 280px 0 0;
+      }
+      h1 {
+        color: #063248;
+        font-size: 45px;
+        font-weight: 600;
+      }
+      span {
+        display: flex;
+        gap: 20px;
+        .range {
+          width: 347px;
+          background: #063248;
+          &::placeholder {
+            background: red;
+          }
+        }
+      }
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        label {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      button {
+        padding: 13px 20px;
+        background: #70bfd1;
+        font-weight: 600;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icons {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
