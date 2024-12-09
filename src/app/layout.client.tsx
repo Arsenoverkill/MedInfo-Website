@@ -1,5 +1,5 @@
 "use client";
-import LayoutPage from "@/components/site/layout/LayoutPage";
+import ReduxProvider from "@/providers/ReduxProvider";
 import React, { FC, ReactNode } from "react";
 
 interface LayoutClientType {
@@ -7,7 +7,7 @@ interface LayoutClientType {
 }
 
 const LayoutClient: FC<LayoutClientType> = ({ children }) => {
-  return <LayoutPage>{children}</LayoutPage>;
+  return <ReduxProvider>{children}</ReduxProvider>;
 };
 
 export default LayoutClient;
