@@ -25,14 +25,10 @@ const SignIn = () => {
     watch,
     formState: { errors, isSubmitted },
   } = useForm<IFormInput>();
+  console.log("🚀 ~ SignIn ~ errors:", errors);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log("Form submitted successfully:", data);
-    formState: { errors },
-  } = useForm<IFormInput>();
-
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -91,13 +87,6 @@ const SignIn = () => {
                 }}
                 value={watch("phone") || "+996"}
                 {...register("phone", {
-            <h4>Номер телефона</h4>
-            <div className={scss.inputWrapper}>
-              <input
-                type="text"
-                value={watch("phone") || "+996"}
-                {...register("phone", {
-                  required: "Номер телефона обязателен",
                   validate: (value) =>
                     value.length === 18 || "Введите полный номер телефона",
                 })}
@@ -110,12 +99,6 @@ const SignIn = () => {
                   <IoCheckmarkDone className={scss.successIcon} />
                 ) : null}
               </div>
-              {errors.phone && (
-                <div>
-                  <MdErrorOutline />
-                  <p className={scss.errorText}>{errors.phone.message}</p>
-                </div>
-              )}
             </div>
           </div>
 
@@ -164,24 +147,6 @@ const SignIn = () => {
                 ) : null}
               </div>
             </div>
-            <h4>Пароль</h4>
-            <input
-              placeholder="Введите как минимум 8 символов"
-              type="password"
-              {...register("password", {
-                required: "Пароль обязателен",
-                minLength: {
-                  value: 8,
-                  message: "Пароль должен быть не менее 8 символов",
-                },
-              })}
-            />
-            {errors.password && (
-              <div>
-                <MdErrorOutline />
-                <p className={scss.errorText}>{errors.password.message}</p>
-              </div>
-            )}
           </div>
 
           <div className={scss.remember}>
@@ -190,7 +155,6 @@ const SignIn = () => {
               <span>Запомнить</span>
             </label>
             <Link href="/auth/forgot">Забыли пароль?</Link>
-            <Link href="#">Забыли пароль?</Link>
           </div>
 
           <button type="submit" className={scss.signIn}>
@@ -201,7 +165,6 @@ const SignIn = () => {
         <div className={scss.register}>
           <span>Вы у нас впервые?</span>
           <Link href="/auth/sign-up">Создать аккаунт</Link>
-          <Link href="#">Создать аккаунт</Link>
         </div>
       </div>
       <Image className={scss.bg} src={bg} alt="bg" />
