@@ -4,20 +4,17 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
 import { IoCheckmarkDone } from "react-icons/io5";
-import { FiEye } from "react-icons/fi";
-import { FaRegEyeSlash } from "react-icons/fa6";
 import bg from "@/../public/authBg.webp";
 import Image from "next/image";
 import Link from "next/link";
-import scss from "./SignIn.module.scss";
+import scss from "./SignUp.module.scss";
 
 interface IFormInput {
   phone: string;
   password: string;
 }
 
-const SignIn = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -25,7 +22,6 @@ const SignIn = () => {
     watch,
     formState: { errors, isSubmitted },
   } = useForm<IFormInput>();
-  console.log("🚀 ~ SignIn ~ errors:", errors);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log("Form submitted successfully:", data);
@@ -70,23 +66,13 @@ const SignIn = () => {
         <p>Введите номер телефона и пароль, чтобы войти</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={scss.phone}>
-            <h4
-              style={{
-                color: errors.phone && isSubmitted ? "#FF5E5D" : "",
-              }}
-            >
-              {errors.phone && isSubmitted
-                ? errors.phone.message
-                : "Номер телефона"}
-            </h4>
+            <h4>Номер телефона</h4>
             <div className={scss.inputWrapper}>
               <input
                 type="text"
-                style={{
-                  borderColor: errors.phone && isSubmitted ? "#FF5E5D" : "",
-                }}
                 value={watch("phone") || "+996"}
                 {...register("phone", {
+                  required: "Номер телефона обязателен",
                   validate: (value) =>
                     value.length === 18 || "Введите полный номер телефона",
                 })}
@@ -103,23 +89,11 @@ const SignIn = () => {
           </div>
 
           <div className={scss.password}>
-            <h4
-              style={{
-                color: errors.password && isSubmitted ? "#FF5E5D" : "",
-              }}
-            >
-              {errors.password && isSubmitted
-                ? errors.password.message
-                : "Пароль"}
-            </h4>
+            <h4>Пароль</h4>
             <div className={scss.inputWrapper}>
               <input
-                style={{
-                  borderColor: errors.password && isSubmitted ? "#FF5E5D" : "",
-                  color: errors.password && isSubmitted ? "#FF5E5D" : "",
-                }}
                 placeholder="Введите как минимум 8 символов"
-                type={showPassword ? "text" : "password"}
+                type="password"
                 {...register("password", {
                   required: "Пароль обязателен",
                   minLength: {
@@ -129,17 +103,6 @@ const SignIn = () => {
                 })}
               />
               <div className={scss.icon}>
-                {showPassword ? (
-                  <FiEye
-                    className={scss.eye}
-                    onClick={() => setShowPassword(false)}
-                  />
-                ) : (
-                  <FaRegEyeSlash
-                    className={scss.eye}
-                    onClick={() => setShowPassword(true)}
-                  />
-                )}
                 {errors.password && isSubmitted ? (
                   <MdErrorOutline title={errors.password.message} />
                 ) : isValidPassword ? (
@@ -172,4 +135,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
