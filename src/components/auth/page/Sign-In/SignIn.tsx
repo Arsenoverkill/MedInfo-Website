@@ -6,8 +6,6 @@ import { MdErrorOutline } from "react-icons/md";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { FiEye } from "react-icons/fi";
 import { FaRegEyeSlash } from "react-icons/fa6";
-import bg from "@/../public/authBg.webp";
-import Image from "next/image";
 import Link from "next/link";
 import scss from "./SignIn.module.scss";
 
@@ -25,7 +23,6 @@ const SignIn = () => {
     watch,
     formState: { errors, isSubmitted },
   } = useForm<IFormInput>();
-  console.log("🚀 ~ SignIn ~ errors:", errors);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log("Form submitted successfully:", data);
@@ -167,7 +164,6 @@ const SignIn = () => {
           <Link href="/auth/sign-up">Создать аккаунт</Link>
         </div>
       </div>
-      <Image className={scss.bg} src={bg} alt="bg" />
     </div>
   );
 };
