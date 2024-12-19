@@ -36,7 +36,7 @@ const StartPageOne = () => {
                   <h5>Переход к диалогу с Medinfo</h5>
                 </span>
               </div>
-               <Link href={'/startStep/steps'}>
+               <Link href={'/starts/steps'}>
               <div className={scss.block}>
                 <span className={scss.iconContainer}>
                 <BsCardChecklist className={scss.icons} />{" "}

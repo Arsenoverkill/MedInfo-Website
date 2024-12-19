@@ -1,10 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import scss from "./Steps.module.scss";
 import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 const Steps = () => {
   const [step, SetStep] = useState(1);
+  const [value, setValue] = useState(0);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(Number(e.target.value));
+  };
 
   const nextStep = () => {
     if (step < 4) {
@@ -18,7 +24,7 @@ const Steps = () => {
       <div className={scss.content}>
         {step === 1 && (
           <div className={scss.step1}>
-            <p>Шаг 1 из 4</p>
+            <p>Шаг 1 из {value + 1}</p>
             <h1>Сколько детей в вашей семье?</h1>
             <p>
               Чтобы создать отдельные медицинские карты для каждого ребенка,
@@ -26,7 +32,15 @@ const Steps = () => {
               всю необходимую информацию.
             </p>
             <span>
-              <input type="range" className={scss.range} /> <p>2</p>
+              <input
+                type="range"
+                className={scss.range}
+                max={10}
+                value={value}
+                min={0}
+                onChange={handleChange}
+              />
+              <p>{value}</p>
             </span>
             <button onClick={() => nextStep()}>
               Следующий шаг <IoIosArrowForward className={scss.icons} />
@@ -35,8 +49,10 @@ const Steps = () => {
         )}
         {step === 2 && (
           <div className={scss.step1}>
-            <p>Шаг 2 из 4</p>
-            <h1>Введите имя первого ребенка</h1>
+            <p>
+              Шаг {step} из {value + 1}
+            </p>
+            <h1>Введите имя {value - 1} ребенка</h1>
             <p>
               Пожалуйста введите точные данные вашего ребенка. Правильные
               сведения упрощают работу нашей платформы.
@@ -44,16 +60,24 @@ const Steps = () => {
             <div className={scss.inputs}>
               <label>
                 Полное имя
-                <input type="text" className={scss.range} />
+                <input
+                  type="text"
+                  className={scss.name}
+                  placeholder="Полное имя"
+                />
               </label>
               <span>
                 <label>
                   Дата рождения
-                  <input type="date" about="date" />
+                  <input
+                    type="date"
+                    className={scss.date}
+                    placeholder="День. Месяц. Год"
+                  />
                 </label>
                 <label>
                   Пол
-                  <select>
+                  <select className={scss.select}>
                     <option>Женский</option>
                     <option>Мужской</option>
                   </select>
@@ -61,7 +85,11 @@ const Steps = () => {
               </span>
               <label>
                 Город проживания
-                <input type="text" />
+                <input
+                  type="text"
+                  placeholder="Город проживания"
+                  className={scss.city}
+                />
               </label>
             </div>
             <button onClick={() => nextStep()}>
@@ -77,9 +105,12 @@ const Steps = () => {
               Поздравляем! Вы успешно создали медицинские карты своим детям.
               Теперь у вас есть полный доступ ко всем возможностям платформы. 
             </p>
-            <button>
+            ///////
+           <Link href={'/'}>
+           <button>
               Приступить к работе <IoIosArrowForward className={scss.icons} />
             </button>
+           </Link>
           </div>
         )}
       </div>

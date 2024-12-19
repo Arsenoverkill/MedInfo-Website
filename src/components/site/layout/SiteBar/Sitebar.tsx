@@ -24,6 +24,7 @@ const SiteBar = () => {
             width={1000}
             height={1000}
             priority
+            rel="preload"
           />
           <span className={scss.onlineDiv}></span>
         </div>
@@ -38,8 +39,11 @@ const SiteBar = () => {
           </h3>
           <RiLogoutBoxRLine className={scss.logout} />
         </span>
-        <details className={scss.detailsPersonal}>
-          <summary className={scss.personalTitle}>Личный кабинет</summary>
+        <details className={scss.detailsPersonal} open>
+          <summary className={scss.personalTitle}>
+            {" "}
+            <IoIosArrowForward className={scss.arrowDetails} /> Личный кабинет
+          </summary>
           <h3>
             <div className={scss.iconTittle}>
               <HiOutlineHashtag className={scss.hashtag} /> Dashboard{" "}
@@ -63,9 +67,16 @@ const SiteBar = () => {
             </div>
             <div className={scss.quantity}>191</div>
           </h3>
+          <h2>
+            Добавить канал <IoIosArrowForward className={scss.arrow} />
+          </h2>
         </details>
-        <details className={scss.detailsPersonal}>
-          <summary className={scss.personalTitle}>Входящие сообщения</summary>
+        <details className={scss.detailsPersonal} open>
+          <summary className={scss.personalTitle}>
+            {" "}
+            <IoIosArrowForward className={scss.arrowDetails} /> Входящие
+            сообщения
+          </summary>
           <h3>
             <div className={scss.iconTittle}>
               {" "}
@@ -77,11 +88,10 @@ const SiteBar = () => {
                 className={scss.userMsg}
               />
               Мединфо
-              <span className={scss.onlineDiv}></span>
+              <div className={scss.onlineDiv}></div>
             </div>
             <div className={scss.quantity}>1</div>
           </h3>
-
           <h3>
             <div className={scss.iconTittle}>
               {" "}
@@ -93,12 +103,45 @@ const SiteBar = () => {
                 className={scss.userMsg}
               />
               Мединфо
-              <span className={scss.onlineDiv}></span>
+              <div className={scss.onlineDiv}></div>
             </div>
             <div className={scss.quantity}>444</div>{" "}
           </h3>
+          <h3>
+            <div className={scss.iconTittle}>
+              {" "}
+              <Image
+                src={user}
+                alt=""
+                width={1000}
+                height={1000}
+                className={scss.userMsg}
+              />
+              Мединфо
+              <div className={scss.onlineDiv}></div>
+            </div>
+            <div className={scss.quantity}>444</div>{" "}
+          </h3>
+          <h3>
+            <div className={scss.iconTittle}>
+              {" "}
+              <Image
+                src={user}
+                alt=""
+                width={1000}
+                height={1000}
+                className={scss.userMsg}
+              />
+              Мединфо
+              <div className={scss.onlineDiv}></div>
+            </div>
+            <div className={scss.quantity}>444</div>{" "}
+          </h3>
+          <h2>
+            Все сообщения <IoIosArrowForward className={scss.arrow} />
+          </h2>
         </details>
-        <span className={scss.userOptions}>
+        <div className={scss.userOptions}>
           <h2>
             {" "}
             <BsCapsule className={scss.optionIcons} /> Купить медикаменты
@@ -115,7 +158,7 @@ const SiteBar = () => {
             {" "}
             <RiLinksLine className={scss.optionIcons} /> Cвязать платформу с
           </h2>
-        </span>
+        </div>
       </div>
     </div>
   );

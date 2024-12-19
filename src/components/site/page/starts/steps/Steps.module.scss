@@ -1,0 +1,123 @@
+.steps {
+  h3 {
+    padding: 17px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: solid 2.5px #d2d2d2;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 150px;
+    align-items: start;
+    margin-top: 80px;
+    padding: 0 55px;
+    .step1 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: start;
+      p {
+        color: #063248;
+        font-size: 20px;
+        padding: 0 280px 0 0;
+      }
+      h1 {
+        color: #063248;
+        font-size: 45px;
+        font-weight: 600;
+      }
+      span {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .range {
+          width: 250px;
+          height: 10px;
+          background: #e0f7fa;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+          &::-webkit-slider-runnable-track {
+            height: 15px;
+            background: #e0f7fa;
+            border-radius: 5px;
+          }
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 16px;
+            background: red;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+          }
+        }
+        p {
+          font-size: 40px;
+          font-weight: 700;
+        }
+      }
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        label {
+          display: flex;
+          flex-direction: column;
+          font-family: 16px;
+          gap: 5px;
+          color: #063248;
+          input {
+            background: #f7fbff;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 17px;
+            color: #063248;
+            border: solid 2px #d4d7e3;
+            outline: none;
+            &::placeholder {
+              color: #8897ad;
+              font-size: 16px;
+            }
+          }
+          .name {
+            width: 400px;
+          }
+          .date {
+            width: 210px;
+            font-size: 18px;
+            color: #063248;
+          }
+          .select {
+            width: 170px;
+          }
+          .city {
+            width: 220px;
+          }
+          select {
+            border-radius: 10px;
+            padding: 10px;
+            border: solid 2px #d4d7e3;
+            outline: none;
+            background: #f7fbff;
+          }
+        }
+      }
+      button {
+        padding: 13px 20px;
+        background: #70bfd1;
+        font-weight: 600;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icons {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
