@@ -1,7 +1,5 @@
 import React from "react";
-import StartPage from "./StartSteps/StartPage";
-
-
+import StartPage from "./starts/StartPage";
 
 const StartStep = () => {
   return (

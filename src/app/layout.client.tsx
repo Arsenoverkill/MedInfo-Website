@@ -7,6 +7,7 @@ interface LayoutClientType {
 }
 
 const LayoutClient: FC<LayoutClientType> = ({ children }) => {
+  
   return <ReduxProvider>{children}</ReduxProvider>;
 };
 

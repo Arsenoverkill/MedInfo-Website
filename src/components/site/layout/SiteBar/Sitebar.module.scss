@@ -1,8 +1,8 @@
 .siteBar {
   display: flex;
-  height: 100vh;
   position: sticky;
-  top: 0;
+  height: 100vh;
+  left: 0;
   .userProfile {
     display: flex;
     flex-direction: column;
@@ -48,20 +48,46 @@
     width: 270px;
     height: 100%;
     background: #e3f1f4;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: transparent #e3f1f4;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: auto;
+    transition: scrollbar-color ease 0.3s;
+    &:hover {
+      scrollbar-color: #70bfd2 #e3f1f4;
+    }
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: 10px;
+    }
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: #70bfd2;
+    }
+    &::-webkit-scrollbar-track {
+      background: #e3f1f4;
+    }
     span {
       display: flex;
       align-items: center;
-      gap: 85px;
+      justify-content: space-between;
       border-bottom: solid 2px #298ea699;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      background: #e3f1f4;
+      z-index: 1;
       h3 {
         font-weight: 500;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 2px;
         font-size: 16px;
-        padding: 25px 20px;
         cursor: pointer;
-        transition: all 0.5s ease;
         .arrow {
           font-size: 17px;
         }
@@ -72,58 +98,67 @@
       }
     }
     .detailsPersonal {
-      font-size: 15px;
+      font-size: 16px;
       border-bottom: solid 2px #298ea699;
       cursor: pointer;
-      transition: all 0.5s ease;
-      list-style: none;
       padding: 5px 13px;
-      .personalTitle {
-        padding: 15px 10px;
-        transition: transform 0.3s ease;
+      transition: ease 0.5s;
 
+      summary {
+        padding: 15px 10px;
+        display: flex;
+        align-items: center;
+        transition: ease 0.3s;
+        gap: 10px;
+        cursor: pointer;
         &::-webkit-details-marker {
+          display: none;
+        }
+        .arrowDetails {
           transition: transform 0.3s ease;
         }
       }
-      &[open] summary {
-        &::-webkit-details-marker {
-          transform: rotate(90deg); /* Поворот стрелки при открытии */
-        }
+      &[open] .arrowDetails {
+        transform: rotate(90deg);
+        transition: transform 0.3s ease;
+      }
+      summary:hover {
+        background: #70bfd1;
+        transition: ease 0.3s;
+        border-radius: 5px;
       }
       h3 {
         font-weight: 500;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 5px;
         font-size: 15px;
         cursor: pointer;
-        padding: 14px 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        padding: 13px 10px;
+        transition: ease-in-out 0.5s;
         .hashtag {
           font-size: 18px;
         }
         .iconTittle {
           display: flex;
           align-items: center;
-          gap: 15px;
+          gap: 5px;
           position: relative;
-
+          transition: ease 0.5s;
           .userMsg {
             width: 35px;
             height: 35px;
           }
           .onlineDiv {
             background: #3eaf3f;
-            width: 10px;
-            height: 10px;
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             border: solid 2px white;
             position: absolute;
-            bottom: -4px;
-            right: 79px;
+            bottom: -3px;
+            right: 69px;
           }
         }
         &:hover {
@@ -139,12 +174,25 @@
           color: #000000;
           background: white;
           min-width: 20px;
-          width: auto;
           height: 20px;
           border-radius: 50px;
         }
       }
+      h2 {
+        font-size: 16px;
+        padding: 13px 10px;
+        font-weight: 500;
+        color: #063248;
+        display: flex;
+        align-items: center;
+        transition: ease-out 0.5s;
+        &:hover {
+          background: #70bfd1;
+          border-radius: 5px;
+        }
+      }
     }
+
     .userOptions {
       display: flex;
       flex-direction: column;
