@@ -1,15 +1,85 @@
-.signUp {
+.SignUp {
+  width: 550px;
+  max-width: 100%;
+  p {
+    margin-block: 20px 50px;
+    color: #8897ad;
+    font-size: 1.2rem;
+  }
   .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    a {
+    gap: 20px;
+    width: 100%;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 20px;
-      padding: 15px 40px;
-      background: #eef4fb;
-      border-radius: 10px;
+      padding-inline: 20px;
+      background: #eff5fb;
+      border-radius: 10px; 
+      width: 100%;
+      cursor: pointer;
+      transition: 0.5s ease background, 0.5s ease border;
+      &:hover {
+        background: #e0e6fe;
+      }
+      img {
+        width: 100px;
+        height: 100%;
+      }
+      span {
+        width: 300px;
+        color: #063248;
+        font-size: 1.25rem;
+      }
+      input[type="checkbox"] {
+        display: grid;
+        place-content: center;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        transform: translateY(-0.075em);
+        border: #bdd2e7 2px solid;
+        &::before {
+          content: "";
+          width: 0.95em;
+          height: 0.95em;
+          clip-path: polygon(
+            14% 44%,
+            0 65%,
+            50% 100%,
+            100% 16%,
+            80% 0%,
+            43% 62%
+          );
+          transform: scale(0);
+          transform-origin: bottom left;
+          transition: 120ms transform ease-in-out;
+          background-color: #eff5fb;
+        }
+        &:checked {
+          background: #063248;
+          border: #063248 2px solid;
+        }
+        &:checked::before {
+          transform: scale(1);
+        }
+      }
     }
+  }
+  button {
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin-top: 50px;
+    background: #70bfd1;
+    color: #063248;
   }
 }
