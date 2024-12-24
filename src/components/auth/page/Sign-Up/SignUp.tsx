@@ -68,7 +68,6 @@ const SignUp = () => {
       >
         Далее
       </button>
-
     </div>
   );
 };
