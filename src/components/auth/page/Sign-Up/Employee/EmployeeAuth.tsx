@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { set, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
 import { IoCheckmarkDone } from "react-icons/io5";
 import Link from "next/link";
@@ -18,9 +18,7 @@ const employeeSuggestions = ["Иванов", "Иванова", "Иван"];
 const positionSuggestions = ["Менеджер", "Разработчик", "Дизайнер"];
 
 const UserAuth = () => {
-  const [inputEmployee, setInputEmployee] = useState<string>("");
   const [employeeSuggestion, setEmployeeSuggestion] = useState<string>("");
-  const [inputPosition, setInputPosition] = useState<string>("");
   const [positionSuggestion, setPositionSuggestion] = useState<string>("");
 
   const {
@@ -29,7 +27,14 @@ const UserAuth = () => {
     setValue,
     watch,
     formState: { errors, isSubmitted },
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({
+    defaultValues: {
+      name: "",
+      phone: "+996",
+      employee: "",
+      position: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log("Form submitted successfully:", data);
@@ -61,53 +66,53 @@ const UserAuth = () => {
   };
 
   const handleInputEmployee = (e: string) => {
-    setInputEmployee(e);
+    setValue("employee", e, { shouldValidate: true });
     const match = employeeSuggestions.find((word) =>
       word.toLowerCase().startsWith(e.toLowerCase())
     );
-
-    if (match && e) {
-      setEmployeeSuggestion(match.slice(e.length));
-    } else {
-      setEmployeeSuggestion("");
-    }
+    setEmployeeSuggestion(match ? match.slice(e.length) : "");
   };
 
   const handleInputPosition = (e: string) => {
-    setPositionSuggestion(e);
+    setValue("position", e, { shouldValidate: true });
     const match = positionSuggestions.find((word) =>
       word.toLowerCase().startsWith(e.toLowerCase())
     );
-
-    if (match && e) {
-      setPositionSuggestion(match.slice(e.length));
-    } else {
-      setPositionSuggestion("");
-    }
+    setPositionSuggestion(match ? match.slice(e.length) : "");
   };
+
   const handleKeyEmployee = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Tab" && employeeSuggestion) {
       event.preventDefault();
-      setInputEmployee(inputEmployee + employeeSuggestion);
+      const currentValue = watch("employee");
+      setValue("employee", currentValue + employeeSuggestion, {
+        shouldValidate: true,
+      });
       setEmployeeSuggestion("");
     }
   };
+
   const handleKeyPosition = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Tab" && positionSuggestion) {
       event.preventDefault();
-      setInputPosition(inputPosition + positionSuggestion);
+      const currentValue = watch("position");
+      setValue("position", currentValue + positionSuggestion, {
+        shouldValidate: true,
+      });
       setPositionSuggestion("");
     }
   };
+
   const renderValidationIcon = (field: keyof IFormInput) => {
     if (errors[field] && isSubmitted) {
       return <MdErrorOutline title={errors[field]?.message} />;
     }
-    if (field === "employee" && watch("employee")?.length > 2)
+    const value = watch(field);
+    if (field === "employee" && value?.length > 2)
       return <IoCheckmarkDone className={scss.successIcon} />;
-    if (field === "position" && watch("position")?.length > 2)
+    if (field === "position" && value?.length > 2)
       return <IoCheckmarkDone className={scss.successIcon} />;
-    if (field === "phone" && watch("phone")?.length === 18)
+    if (field === "phone" && value?.length === 18)
       return <IoCheckmarkDone className={scss.successIcon} />;
     return null;
   };
@@ -134,32 +139,30 @@ const UserAuth = () => {
           })}
           style={{
             borderColor: errors[name] && isSubmitted ? "#FF5E5D" : "",
-            color:
-              name === "employee" || name === "position" ? "transparent" : "",
           }}
           onChange={(e) => {
-            if (name === "phone") {
-              handlePhoneChange(e);
-            } else if (name == "employee") {
-              handleInputEmployee(e.target.value);
-            } else if (name == "position") {
-              handleInputPosition(e.target.value);
-            }
+            if (name === "phone") handlePhoneChange(e);
+            else if (name === "employee") handleInputEmployee(e.target.value);
+            else if (name === "position") handleInputPosition(e.target.value);
           }}
-          value={
-            name === "employee"
-              ? inputEmployee
-              : name === "position"
-              ? inputPosition
-              : watch(name) || ""
+          onKeyDown={
+            name === "employee" ? handleKeyEmployee : handleKeyPosition
           }
-          onKeyDown={name == "employee" ? handleKeyEmployee : handleKeyPosition}
         />
         <div className={scss.icon}>{renderValidationIcon(name)}</div>
         {name == "employee" || name == "position" ? (
           <div className={scss.overlay}>
-            {name === "employee" ? inputEmployee : inputPosition}
-            <span className={scss.suggestion}>
+            {name === "employee" ? watch("employee") : watch("position")}
+            <span
+              style={{
+                color:
+                  (name === "employee" && watch("employee") == "") ||
+                  (name === "position" && watch("position") == "")
+                    ? "transparent"
+                    : "",
+              }}
+              className={scss.suggestion}
+            >
               {name === "employee" ? employeeSuggestion : positionSuggestion}
             </span>
           </div>
@@ -171,10 +174,8 @@ const UserAuth = () => {
   return (
     <div className={scss.EmployeeAuth}>
       <div className={scss.content}>
-        <div>
-          <h1>Создаем аккаунт</h1>
-          <p>Пожалуйста, заполните поля ниже</p>
-        </div>
+        <h1>Создаем аккаунт</h1>
+        <p>Пожалуйста, заполните поля ниже</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           {renderInputField("name", "ФИО")}
           {renderInputField("phone", "Номер телефона")}
@@ -182,7 +183,6 @@ const UserAuth = () => {
             {renderInputField("employee", "Сотрудник")}
             {renderInputField("position", "Должность")}
           </div>
-
           <button type="submit" className={scss.signIn}>
             Зарегистрироваться
           </button>
