@@ -102,7 +102,6 @@ const UserAuth = () => {
       setPositionSuggestion("");
     }
   };
-
   const renderValidationIcon = (field: keyof IFormInput) => {
     if (errors[field] && isSubmitted) {
       return <MdErrorOutline title={errors[field]?.message} />;
