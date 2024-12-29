@@ -30,10 +30,11 @@ const LayoutPageAuth: FC<LayoutPageType> = ({ children }) => {
           <Image
             key={index}
             src={image}
-            alt="bg"
+            alt={`background ${index + 1}`}
             className={`${scss.bg} ${
               index === currentIndex ? scss.active : scss.inactive
             }`}
+            priority={index === 0}
           />
         ))}
       </div>

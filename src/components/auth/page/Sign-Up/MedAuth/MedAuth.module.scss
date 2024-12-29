@@ -1,0 +1,128 @@
+.MedAuth {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px;
+    max-width: 100%;
+    h1 {
+      font-size: 2.5rem;
+    }
+    p {
+      color: #8897ad;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .inputsWrapper {
+        display: flex;
+        gap: 10px;
+      }
+      input[type="number"]::-webkit-inner-spin-button {
+        display: none;
+      }
+      input {
+        width: 100%;
+        padding: 15px 10px;
+        border: #d4d7e3 1.5px solid;
+        background: #f3f7fc;
+        border-radius: 10px;
+        outline: none;
+        font-size: 1rem;
+        transition: 0.4s;
+
+        &:focus {
+          border-color: #70bfd1;
+          box-shadow: 0 0 5px rgba(112, 191, 209, 0.6);
+        }
+
+        &.error {
+          border-color: #ff5e5d;
+          box-shadow: 0 0 5px rgba(255, 94, 93, 0.5);
+        }
+      }
+
+      h4 {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+        transition: 0.4s;
+      }
+
+      .inputWrapper {
+        position: relative;
+        .icon {
+          top: 15px;
+          right: 10px;
+          position: absolute;
+
+          .successIcon {
+            color: #3eaf3f;
+          }
+
+          svg {
+            color: #ff5e5d;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+
+      button {
+        padding-block: 15px;
+        border-radius: 12px;
+        font-size: 1.15rem;
+        background: #70bfd1;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 20px;
+        &:hover {
+          background: #5ba9b6;
+        }
+
+        &:active {
+          background: #509fa9;
+        }
+      }
+    }
+    .agree {
+      display: flex;
+      font-size: 1rem;
+
+      label {
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+
+        input {
+          width: 3rem;
+          height: 1rem;
+        }
+        span {
+          span {
+            color: #1e4ae9;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .login {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1rem;
+      span {
+        color: #8897ad;
+      }
+      a {
+        color: black;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+    }
+  }
+}

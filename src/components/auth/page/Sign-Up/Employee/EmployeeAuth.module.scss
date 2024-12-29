@@ -22,12 +22,13 @@
       .overlay {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 2px;
         width: 100%;
         font-size: 1rem;
         pointer-events: none;
         padding: 15px 10px;
-        .suggestion {
+        color: transparent;
+        .suggestion { 
           color: #ccc;
         }
       }
