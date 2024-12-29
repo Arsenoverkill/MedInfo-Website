@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
 import { IoCheckmarkDone } from "react-icons/io5";
-import { FiEye } from "react-icons/fi";
-import { FaRegEyeSlash } from "react-icons/fa6";
 import Link from "next/link";
 import scss from "./MedAuth.module.scss";
 
@@ -13,12 +10,11 @@ interface IFormInput {
   name: string;
   email: string;
   phone: string;
-  password: string;
-  confirmPassword: string;
+  company: string;
+  QuantityEmp: string;
 }
 
 const MedAuth = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -57,10 +53,10 @@ const MedAuth = () => {
   };
 
   const isValidPhone = watch("phone")?.length === 18;
-  const isValidPassword = watch("password")?.length >= 8;
-  const isValidConfirmPassword = watch("confirmPassword") === watch("password");
   const isValidEmail = watch("email")?.includes("@");
   const isValidName = watch("name")?.length > 2;
+  const isValidCompany = watch("company")?.length > 2;
+  const isValidQuantity = watch("QuantityEmp")?.length > 0;
 
   const renderValidationIcon = (field: keyof IFormInput) => {
     if (errors[field] && isSubmitted) {
@@ -72,18 +68,14 @@ const MedAuth = () => {
       return <IoCheckmarkDone className={scss.successIcon} />;
     if (field === "phone" && isValidPhone)
       return <IoCheckmarkDone className={scss.successIcon} />;
-    if (field === "password" && isValidPassword)
+    if (field === "company" && isValidCompany)
       return <IoCheckmarkDone className={scss.successIcon} />;
-    if (field === "confirmPassword" && isValidConfirmPassword)
+    if (field === "QuantityEmp" && isValidQuantity)
       return <IoCheckmarkDone className={scss.successIcon} />;
     return null;
   };
 
-  const renderInputField = (
-    name: keyof IFormInput,
-    label: string,
-    type: string = "text"
-  ) => (
+  const renderInputField = (name: keyof IFormInput, label: string) => (
     <div className={scss.inputGroup}>
       <h4
         style={{
@@ -94,30 +86,20 @@ const MedAuth = () => {
       </h4>
       <div className={scss.inputWrapper}>
         <input
-          type={
-            name === "password" || name === "confirmPassword"
-              ? showPassword
-                ? "text"
-                : "password"
-              : type
+          inputMode={
+            name === "QuantityEmp" || name === "phone" ? "numeric" : "text"
           }
-          placeholder={
-            name === "confirmPassword"
-              ? "Подвердите"
-              : `Введите ${label.toLowerCase()}`
-          }
+          type={name === "QuantityEmp" ? "number" : "text"}
           {...register(name, {
             required: `${label} обязательно`,
+            ...(name === "QuantityEmp" && {
+              validate: (value) =>
+                value.length <= 3 || "Можно ввести не более 3 цифр",
+            }),
             ...(name === "phone" && {
               validate: {
                 validLength: (value) =>
                   value.length === 18 || "Введите полный номер телефона",
-              },
-            }),
-            ...(name === "password" && {
-              minLength: {
-                value: 8,
-                message: "Пароль должен быть не менее 8 символов",
               },
             }),
             ...(name === "email" && {
@@ -126,39 +108,24 @@ const MedAuth = () => {
                 message: "Некорректный email",
               },
             }),
-            ...(name === "confirmPassword" && {
-              validate: (value) =>
-                value === watch("password") || "Пароли не совпадают",
-            }),
           })}
           style={{
             borderColor: errors[name] && isSubmitted ? "#FF5E5D" : "",
           }}
-          onChange={name === "phone" ? handlePhoneChange : undefined}
+          onInput={(e) => {
+            if (name === "QuantityEmp") {
+              const input = e.target as HTMLInputElement;
+              input.value = input.value.slice(0, 3);
+            }
+          }}
         />
-        <div className={scss.icon}>
-          {name === "password" || name === "confirmPassword" ? (
-            showPassword ? (
-              <FiEye
-                className={scss.eye}
-                onClick={() => setShowPassword(false)}
-              />
-            ) : (
-              <FaRegEyeSlash
-                className={scss.eye}
-                onClick={() => setShowPassword(true)}
-              />
-            )
-          ) : (
-            renderValidationIcon(name)
-          )}
-        </div>
+        <div className={scss.icon}>{renderValidationIcon(name)}</div>
       </div>
     </div>
   );
 
   return (
-    <div className={scss.SignUp}>
+    <div className={scss.MedAuth}>
       <div className={scss.content}>
         <div>
           <h1>Создаем аккаунт</h1>
@@ -166,13 +133,12 @@ const MedAuth = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {renderInputField("name", "ФИО")}
-          {renderInputField("email", "E-mail", "email")}
+          {renderInputField("email", "E-mail")}
           {renderInputField("phone", "Номер телефона")}
           <div className={scss.inputsWrapper}>
-            {renderInputField("password", "Пароль")}
-            {renderInputField("confirmPassword", "Подвердите")}
+            {renderInputField("company", "Название компании")}
+            {renderInputField("QuantityEmp", "Количество сотрудников")}
           </div>
-
           <button type="submit" className={scss.signIn}>
             Зарегистрироваться
           </button>
